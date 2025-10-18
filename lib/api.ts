@@ -15,8 +15,8 @@ const headers = {
 };
 
 export const noteFetch = async (
-  page: number,
-  text: string
+  text: string,
+  page: number
 ): Promise<FetchItem> => {
   const res = await axios.get<FetchItem>(
     `${API_URL}?search=${text}&page=${page}&perPage=20&sortBy=created`,
@@ -27,7 +27,7 @@ export const noteFetch = async (
 };
 
 export const noteDelete = async (id: string): Promise<FormValues> => {
-  const res = await axios.delete<FormValues>(`${API_URL}/${id}`, { headers });
+  const res = await axios.delete<Note>(`${API_URL}/${id}`, { headers });
 
   return res.data;
 };
@@ -39,11 +39,11 @@ export const noteCreate = async ({
 }: FormValues): Promise<FormValues> => {
   const newNote = { title, content, tag };
 
-  const res = await axios.post<FormValues>(API_URL, newNote, { headers });
+  const res = await axios.post<Note>(API_URL, newNote, { headers });
   return res.data;
 };
 
-export const fetchNoteById = async (id: string) => {
+export const fetchNoteById = async (id: string): Promise<Note> => {
   const { data } = await axios.get<Note>(`${API_URL}/${id}`, { headers });
   return data;
 };

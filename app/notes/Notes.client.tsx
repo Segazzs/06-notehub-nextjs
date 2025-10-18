@@ -12,12 +12,12 @@ import NoteForm from "@/components/NoteForm/NoteForm";
 import NoteList from "@/components/NoteList/NoteList";
 
 export default function NotesClient() {
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const [text, setText] = useState<string>("");
   const { data, isSuccess } = useQuery({
-    queryKey: ["notes", page, text],
-    queryFn: () => noteFetch(page, text),
+    queryKey: ["notes", text, page],
+    queryFn: () => noteFetch(text, page),
     refetchOnMount: false,
     placeholderData: keepPreviousData,
   });

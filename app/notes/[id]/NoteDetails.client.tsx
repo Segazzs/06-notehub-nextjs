@@ -13,16 +13,27 @@ export default function NoteDetails() {
     queryFn: () => fetchNoteById(id),
     refetchOnMount: false,
   });
+
+  if (isLoading) {
+    return <p className={css.loading}>Loading, please wait...</p>;
+  }
+
+  if (error) {
+    return <p className={css.error}>Something went wrong.</p>;
+  }
+
+  if (!data) {
+    return <p className={css.empty}>No note found.</p>;
+  }
+
   return (
     <div className={css.container}>
-      {isLoading && <p>Loading, please wait...</p>}
-      {error && <p>Something went wrong.</p>}
       <div className={css.item}>
         <div className={css.header}>
-          <h2>{data?.title}</h2>
+          <h2>{data.title}</h2>
         </div>
-        <p className={css.content}>{data?.content}</p>
-        <p className={css.date}>{data?.createdAt}</p>
+        <p className={css.content}>{data.content}</p>
+        <p className={css.date}>{new Date(data.createdAt).toLocaleString()}</p>
       </div>
     </div>
   );

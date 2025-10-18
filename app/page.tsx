@@ -2,7 +2,7 @@ import css from "./Home.module.css";
 
 export default async function Home() {
   return (
-    <div className={css.container}>
+    <main className={css.container}>
       <h1 className={css.title}>Welcome to NoteHub</h1>
       <p className={css.description}>
         NoteHub is a simple and efficient application designed for managing
@@ -15,6 +15,6 @@ export default async function Home() {
         NoteHub offers a streamlined experience for anyone who values clarity
         and productivity.
       </p>
-    </div>
+    </main>
   );
 }

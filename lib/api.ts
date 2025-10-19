@@ -26,7 +26,7 @@ export const noteFetch = async (
   return res.data;
 };
 
-export const noteDelete = async (id: string): Promise<FormValues> => {
+export const noteDelete = async (id: string): Promise<Note> => {
   const res = await axios.delete<Note>(`${API_URL}/${id}`, { headers });
 
   return res.data;
@@ -36,7 +36,7 @@ export const noteCreate = async ({
   title,
   content,
   tag,
-}: FormValues): Promise<FormValues> => {
+}: FormValues): Promise<Note> => {
   const newNote = { title, content, tag };
 
   const res = await axios.post<Note>(API_URL, newNote, { headers });
